@@ -7,6 +7,9 @@ const packagesToPin = [
 ]
 
 function adjustDeps(packageDirectoryPath) {
+  if (typeof packageDirectoryPath !== 'string' || packageDirectoryPath.includes('..')) {
+    throw new Error('Invalid package directory path')
+  }
   const packageJsonPath = path.join(packageDirectoryPath, `package.json`)
   const packageJsonString = fs.readFileSync(packageJsonPath, `utf-8`)
 
